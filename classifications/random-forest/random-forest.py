@@ -43,7 +43,7 @@ xte_std = sc0.transform (xte)
 # The following is for classifying
 rfc =  RFC(criterion="entropy",
            n_estimators=50,
-           random_state=0)
+           random_state=1)
 rfc.fit (xtr_std, ytr)
 ypd = dtc.predict (xte_std)
 print ("accuracy: ", dtc.score (xte_std, yte))
