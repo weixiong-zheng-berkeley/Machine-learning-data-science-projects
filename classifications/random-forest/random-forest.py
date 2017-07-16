@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+plt.style.use('ggplot')
 # svm functionality
 from sklearn.ensemble import RandomForestClassifier as RFC
 # data set needed
@@ -9,7 +10,7 @@ from sklearn.model_selection import train_test_split as tts
 
 # plotting results requirement
 from decisionboundary import plot_decision_boundary as pdb
-from decisionboundary import marker_list_all, color_list_all
+from decisionboundary import marker_list_all, color_list_all2
 # standardizing data
 from sklearn.preprocessing import StandardScaler as SC
 # get the data from iris
@@ -23,7 +24,7 @@ num_classes = len(np.unique(y))
 for ind, val in enumerate (np.unique(y)):
     plt.scatter (x[y==val,0], x[y==val,1],
                  marker = marker_list_all[ind],
-                 c = color_list_all[ind],
+                 c = color_list_all2[ind],
                  label='Class '+str(val))
 plt.legend (loc = 0)
 plt.xlim (x[:,0].min(), x[:,0].max())
@@ -45,7 +46,7 @@ rfc =  RFC(criterion="entropy",
            n_estimators=50,
            random_state=1)
 rfc.fit (xtr_std, ytr)
-ypd = dtc.predict (xte_std)
-print ("accuracy: ", dtc.score (xte_std, yte))
+ypd = rfc.predict (xte_std)
+print ("accuracy: ", rfc.score (xte_std, yte))
 
 pdb (x, y, classifier=rfc, standardizer=sc0)

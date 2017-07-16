@@ -9,6 +9,9 @@ marker_list_all = list (markers.MarkerStyle.markers.keys())
 random.shuffle (marker_list_all)
 color_list_all = list (cnames)
 random.shuffle (color_list_all)
+color_list_all2 = list (cnames)
+random.shuffle (color_list_all2)
+
 
 def plot_decision_boundary (x, y, classifier,
                             feature_ind1=0, feature_ind2=1,
@@ -44,10 +47,10 @@ def plot_decision_boundary (x, y, classifier,
     xx1, xx2 = np.meshgrid (np.linspace (x[:,feature_ind1].min(), x[:,feature_ind1].max(), num),
                             np.linspace (x[:,feature_ind2].min(), x[:,feature_ind2].max(), num))
     cmp=lcmp(color_list[:num_classes])
-    plt.contourf (xx1, xx2, ypd, cmap=cmp, alpha=0.2)
+    plt.contourf (xx1, xx2, ypd, cmap=cmp, alpha=0.1)
     for ind, val in enumerate (np.unique(y)):
         plt.scatter (x[y==val,0], x[y==val,1],
-                     c=color_list[ind], marker=marker_list[ind],
+                     c=color_list_all2[ind], marker=marker_list[ind],
                      label='Class '+str(val), alpha=1)
     plt.xlabel ('Feature ' + str(feature_ind1))
     plt.ylabel ('Feature ' + str(feature_ind2))
