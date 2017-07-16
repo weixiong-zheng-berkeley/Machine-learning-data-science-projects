@@ -48,7 +48,7 @@ def plot_decision_boundary (x, y, classifier,
     for ind, val in enumerate (np.unique(y)):
         plt.scatter (x[y==val,0], x[y==val,1],
                      c=color_list[ind], marker=marker_list[ind],
-                     label='Class '+str(val), alpha=1)
+                     label='Class '+str(val))
     plt.xlabel ('Feature ' + str(feature_ind1))
     plt.ylabel ('Feature ' + str(feature_ind2))
     plt.xlim (x[:,feature_ind1].min(), x[:,feature_ind1].max())

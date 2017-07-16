@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 # svm functionality
-from sklearn.tree import DecisionTreeClassifier as DTC
+from sklearn.ensemble import RandomForestClassifier as RFC
 # data set needed
 from sklearn import datasets as ds
 # data set separation
@@ -14,7 +14,7 @@ from decisionboundary import marker_list_all, color_list_all
 from sklearn.preprocessing import StandardScaler as SC
 # get the data from iris
 iris = ds.load_iris ()
-x = iris.data[:,[2,3]]
+x = iris.data[:,[2,3]] # one can also change to other pairs
 y = iris.target
 
 # visualize how they look
@@ -29,21 +29,23 @@ plt.legend (loc = 0)
 plt.xlim (x[:,0].min(), x[:,0].max())
 plt.ylim (x[:,1].min(), x[:,1].max())
 plt.tight_layout ()
-pic1 = 'scatter-show.pdf'
+pic1 = 'random-forest-scat.pdf'
 plt.savefig (pic1)
 plt.show ()
 
 # separating data set
-xtr, xte, ytr, yte = tts (x, y, test_size = 0.3)
+xtr, xte, ytr, yte = tts (x, y, test_size = 0.3, random_state=0)
 # standarizing the data
 sc0 = SC ()
 sc0.fit (xtr)
 xtr_std = sc0.transform (xtr)
 xte_std = sc0.transform (xte)
 # The following is for classifying
-dtc =  DTC()
-dtc.fit (xtr_std, ytr)
+rfc =  RFC(criterion="entropy",
+           n_estimators=50,
+           random_state=0)
+rfc.fit (xtr_std, ytr)
 ypd = dtc.predict (xte_std)
 print ("accuracy: ", dtc.score (xte_std, yte))
 
-pdb (x, y, classifier=dtc, standardizer=sc0)
+pdb (x, y, classifier=rfc, standardizer=sc0)
