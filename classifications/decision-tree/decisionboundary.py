@@ -8,7 +8,7 @@ from matplotlib import markers
 marker_list_all = list (markers.MarkerStyle.markers.keys())
 random.shuffle (marker_list_all)
 color_list_all = list (cnames)
-random.shuffle (color_list_all)
+#random.shuffle (color_list_all)
 
 def plot_decision_boundary (x, y, classifier,
                             feature_ind1=0, feature_ind2=1,
